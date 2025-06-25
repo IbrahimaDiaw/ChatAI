@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBackend", "ChatBackend\ChatBackend.csproj", "{80ADC9E5-089D-70EC-7D79-166F41E403C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatShared", "ChatShared\ChatShared.csproj", "{68D1DCFA-B208-45DA-9F5D-444138103810}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAIClient", "ChatAIClient\ChatAIClient.csproj", "{160F1F90-8B58-46F1-AAD1-BBCF3A672809}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80ADC9E5-089D-70EC-7D79-166F41E403C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80ADC9E5-089D-70EC-7D79-166F41E403C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80ADC9E5-089D-70EC-7D79-166F41E403C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80ADC9E5-089D-70EC-7D79-166F41E403C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D1DCFA-B208-45DA-9F5D-444138103810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D1DCFA-B208-45DA-9F5D-444138103810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D1DCFA-B208-45DA-9F5D-444138103810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D1DCFA-B208-45DA-9F5D-444138103810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160F1F90-8B58-46F1-AAD1-BBCF3A672809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160F1F90-8B58-46F1-AAD1-BBCF3A672809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160F1F90-8B58-46F1-AAD1-BBCF3A672809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160F1F90-8B58-46F1-AAD1-BBCF3A672809}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90C63C5C-22DA-4CC2-B3A8-2FF5C3EF6FE6}
+	EndGlobalSection
+EndGlobal

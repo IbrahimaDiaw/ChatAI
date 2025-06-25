@@ -1,0 +1,147 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client
+@using Syncfusion.Blazor.InteractiveChat
+@implements IAsyncDisposable
+@inject HubConnection HubConnection
+
+<PageTitle>AI Chat Assistant</PageTitle>
+
+<div class="chat-container">
+    <div class="header">
+        <h2>🤖 AI Chat Assistant</h2>
+        <div class="status @GetStatusClass()">@GetConnectionStatus()</div>
+    </div>
+
+    <div class="aiassist-container">
+        <SfAIAssistView PromptSuggestions="@promptSuggestions"
+                        PromptRequested="@PromptRequest"
+                        Prompts="@prompts"
+                        Width="100%"
+                        Height="500px">
+        </SfAIAssistView>
+    </div>
+</div>
+
+@code {
+    private string sessionId = Guid.NewGuid().ToString()[..8];
+    private bool isConnected = false;
+
+    private List<string> promptSuggestions = new List<string>
+    {
+        "Hello, how can you help me?",
+        "What can you do?",
+        "Explain quantum computing",
+        "Write a Python function",
+        "Help me with my project"
+    };
+
+    private List<AssistViewPrompt> prompts = new List<AssistViewPrompt>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        HubConnection.On<string, string, string>("ReceiveMessage", async (user, message, session) =>
+        {
+            if (session == sessionId && user == "AI Assistant")
+            {
+                if (prompts.Count > 0)
+                {
+                    prompts[prompts.Count - 1].Response = message;
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+        });
+
+        HubConnection.On<string>("ReceiveError", async (error) =>
+        {
+            if (prompts.Count > 0)
+            {
+                prompts[prompts.Count - 1].Response = $"Error: {error}";
+                await InvokeAsync(StateHasChanged);
+            }
+        });
+
+        HubConnection.Closed += async (error) =>
+        {
+            isConnected = false;
+            await InvokeAsync(StateHasChanged);
+        };
+
+        HubConnection.Reconnected += async (connectionId) =>
+        {
+            isConnected = true;
+            await InvokeAsync(StateHasChanged);
+        };
+
+        try
+        {
+            await HubConnection.StartAsync();
+            isConnected = true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Connection failed: {ex.Message}");
+            isConnected = false;
+        }
+
+        StateHasChanged();
+    }
+
+    private async Task PromptRequest(AssistViewPromptRequestedEventArgs args)
+    {
+        try
+        {
+            if (HubConnection.State == HubConnectionState.Connected)
+            {
+                var newPrompt = new AssistViewPrompt
+                {
+                    Prompt = args.Prompt,
+                    Response = "🤖 Thinking..."
+                };
+                prompts.Add(newPrompt);
+                StateHasChanged();
+              
+                await HubConnection.SendAsync("SendMessage", "User", args.Prompt, sessionId);
+
+ 
+                args.Response = "Processing...";
+            }
+            else
+            {
+                args.Response = "❌ Not connected to AI service.";
+            }
+        }
+        catch (Exception ex)
+        {
+            args.Response = $"❌ Error: {ex.Message}";
+        }
+    }
+
+    private string GetConnectionStatus()
+    {
+        return HubConnection.State switch
+        {
+            HubConnectionState.Connected => "Connected",
+            HubConnectionState.Connecting => "Connecting...",
+            HubConnectionState.Reconnecting => "Reconnecting...",
+            _ => "Disconnected"
+        };
+    }
+
+    private string GetStatusClass()
+    {
+        return HubConnection.State switch
+        {
+            HubConnectionState.Connected => "connected",
+            HubConnectionState.Connecting or HubConnectionState.Reconnecting => "connecting",
+            _ => "disconnected"
+        };
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (HubConnection != null)
+        {
+            await HubConnection.DisposeAsync();
+        }
+    }
+}

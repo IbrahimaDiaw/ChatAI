@@ -1,0 +1,73 @@
+﻿.chat-container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .header h2 {
+        margin: 0;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .status {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .connected {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .disconnected {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .connecting {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
+
+    .aiassist-container {
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        overflow: hidden;
+        background: white;
+    }
+
+@media (max-width: 768px) {
+        .chat-container {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .aiassist-container {
+            height: 400px !important;
+        }
+
+        .header {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+    }

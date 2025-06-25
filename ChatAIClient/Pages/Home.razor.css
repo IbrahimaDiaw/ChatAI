@@ -1,0 +1,84 @@
+﻿.chat-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+    .header h2 {
+        margin: 0;
+        color: #333;
+        font-weight: 600;
+    }
+
+.status {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.connected {
+    background: #d4edda;
+    color: #155724;
+}
+
+.disconnected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.connecting {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.aiassist-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    background: white;
+    min-height: 500px;
+}
+
+/* Styles Syncfusion personnalisés */
+::deep .e-assistview .e-assistview-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+}
+
+::deep .e-assistview .e-message.e-user {
+    background: #007bff;
+    color: white;
+    border-radius: 18px 18px 6px 18px;
+    margin-left: 50px;
+    padding: 12px 16px;
+}
+
+::deep .e-assistview .e-message.e-bot {
+    background: #f8f9fa;
+    color: #333;
+    border-radius: 18px 18px 18px 6px;
+    margin-right: 50px;
+    padding: 12px 16px;
+    border: 1px solid #e9ecef;
+}
+
+::deep .e-assistview .e-assistview-content {
+    padding: 20px;
+    background: #fafbfc;
+}
